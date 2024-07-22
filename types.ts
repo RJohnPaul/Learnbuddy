@@ -5,4 +5,6 @@ export interface Course {
     description: string;
     level: string;
     content: string;
+    author: string;
+    authorLink: string;
   }
