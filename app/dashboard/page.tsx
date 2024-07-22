@@ -1,27 +1,41 @@
+// app/dashboard/page.tsx
 'use client'
-import React from 'react';
-import CourseCard from '../../components/CourseCard';
 
-const mockCourses = [
-  { id: 1, title: "Introduction to React Basics", description: "Learn the basics of React", level: "Beginner" },
-  { id: 2, title: "Advanced JavaScript", description: "Deep dive into JavaScript concepts", level: "Intermediate" },
-];
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import CourseList from '@/components/CourseList'
+import CourseContent from '@/components/CouseContent'
+import { Course } from '@/types'
+import { Button } from "@/components/ui/button"
+import { logout } from '@/utils/auth'
 
 export default function Dashboard() {
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn')
+    if (!isLoggedIn) {
+      router.push('/login')
+    }
+  }, [router])
+
+  const handleLogout = () => {
+    logout()
+    router.push('/login')
+  }
+
   return (
-    <React.Fragment>
-      <h2 className="text-2xl font-bold mb-4">Your Recommended Courses</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {mockCourses.map((course) => (
-          <CourseCard
-            key={course.id}
-            title={course.title}
-            description={course.description}
-            level={course.level}
-            onClick={() => console.log(`Starting course: ${course.title}`)}
-          />
-        ))}
+    <div className="container mx-auto p-4">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Learning Dashboard</h1>
+        <Button onClick={handleLogout}>Logout</Button>
       </div>
-    </React.Fragment>
-  );
+      {selectedCourse ? (
+        <CourseContent course={selectedCourse} onBack={() => setSelectedCourse(null)} />
+      ) : (
+        <CourseList onSelectCourse={setSelectedCourse} />
+      )}
+    </div>
+  )
 }
