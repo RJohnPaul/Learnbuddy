@@ -3,7 +3,7 @@ import React from 'react';
 import CourseCard from '../../components/CourseCard';
 
 const mockCourses = [
-  { id: 1, title: "Introduction to React", description: "Learn the basics of React", level: "Beginner" },
+  { id: 1, title: "Introduction to React Basics", description: "Learn the basics of React", level: "Beginner" },
   { id: 2, title: "Advanced JavaScript", description: "Deep dive into JavaScript concepts", level: "Intermediate" },
 ];
 
