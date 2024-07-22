@@ -16,12 +16,11 @@ export default function CoursesDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {mockCourses.map((course) => (
             <CourseCard
-              key={course.id}
-              title={course.title}
-              description={course.description}
-              level={course.level}
-              onClick={() => console.log(`Starting course: ${course.title}`)}
-            />
+                  key={course.id}
+                  title={course.title}
+                  description={course.description}
+                  level={course.level}
+                  onClick={() => console.log(`Starting course: ${course.title}`)} author={''} authorLink={''}            />
           ))}
         </div>
       </CardContent>
