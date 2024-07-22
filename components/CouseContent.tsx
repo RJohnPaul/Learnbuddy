@@ -5,11 +5,13 @@ import ReactMarkdown from 'react-markdown'
 import { Course } from '@/types'
 
 interface CourseContentProps {
-  course: Course;
+  course: Course | null;
   onBack: () => void;
 }
 
 export default function CourseContent({ course, onBack }: CourseContentProps) {
+  if (!course) return null;
+
   return (
     <div>
       <Button onClick={onBack} className="mb-4">Back to Courses</Button>
