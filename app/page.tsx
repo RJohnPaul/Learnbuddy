@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import CourseList from '@/components/CourseList'
 import CourseContent from '@/components/CouseContent'
+import { Course } from '@/types'
 
 export default function Dashboard() {
   const [started, setStarted] = useState(false)

@@ -1,14 +1,7 @@
 // components/CourseList.tsx
 import React from 'react'
 import CourseCard from './CourseCard'
-
-interface Course {
-  id: number
-  title: string
-  description: string
-  level: string
-  content: string
-}
+import { Course } from '@/types'
 
 const courses: Course[] = [
   {

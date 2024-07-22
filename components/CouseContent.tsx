@@ -2,13 +2,11 @@
 import React from 'react'
 import { Button } from "@/components/ui/button"
 import ReactMarkdown from 'react-markdown'
+import { Course } from '@/types'
 
 interface CourseContentProps {
-  course: {
-    title: string
-    content: string
-  }
-  onBack: () => void
+  course: Course;
+  onBack: () => void;
 }
 
 export default function CourseContent({ course, onBack }: CourseContentProps) {
