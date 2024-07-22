@@ -1,15 +1,26 @@
-import Link from 'next/link';
+'use client'
 
-export default function Home() {
+import React from 'react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import CoursesDashboard from '@/components/CoursesDashboard'
+import BlogDashboard from '@/components/BlogDashboard'
+
+export default function Dashboard() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold mb-4">Welcome to LearnBuddy</h1>
-      <p className="text-xl mb-8">Your personalized learning companion</p>
-      <Link href="/dashboard">
-        <p className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Get Started
-        </p>
-      </Link>
-    </main>
-  );
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6">Learning Dashboard</h1>
+      <Tabs defaultValue="courses">
+        <TabsList>
+          <TabsTrigger value="courses">Courses</TabsTrigger>
+          <TabsTrigger value="blog">Blog</TabsTrigger>
+        </TabsList>
+        <TabsContent value="courses">
+          <CoursesDashboard />
+        </TabsContent>
+        <TabsContent value="blog">
+          <BlogDashboard />
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
 }
