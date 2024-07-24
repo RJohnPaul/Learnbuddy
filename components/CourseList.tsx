@@ -1,177 +1,164 @@
 // components/CourseList.tsx
-import React from 'react'
+import React, { useState } from 'react'
 import CourseCard from './CourseCard'
-import { Course } from '@/types'
+import { Course, Quiz } from '@/types'
 
 const courses: Course[] = [
   {
     id: 1,
-    title: "Basics",
-    description: "A comprehensive journey through React's core concepts and best practices",
-    level: "Beginner to Intermediate",
+    title: "React for Everyone",
+    description: "Learn the basics of React in a fun and interactive way",
+    level: "Beginner",
     content: `
-# Mastering React Fundamentals
+# Welcome to React for Everyone!
 
 ## What is React?
 
-React is a powerful JavaScript library for building user interfaces. Developed by Facebook, it's known for its efficiency, flexibility, and component-based architecture.
+React is a popular tool for building websites and apps. Think of it like digital Lego blocks that help create interactive web pages.
 
 ## Key Concepts
 
-1. **Components**: The building blocks of React applications
-2. **JSX**: A syntax extension for JavaScript that looks similar to XML or HTML
-3. **State and Props**: Mechanisms for managing and passing data in React
-4. **Hooks**: Functions that let you use state and other React features without writing a class
+1. **Components**: These are like building blocks for your website
+2. **Props**: A way to pass information between components
+3. **State**: How React remembers and updates information
 
-## Your First React Component
+## Let's Build Something!
 
-Let's create a simple React component:
+We'll create a simple greeting component:
 
 \`\`\`jsx
-import React from 'react';
-
-function Welcome(props) {
+function Greeting(props) {
   return <h1>Hello, {props.name}!</h1>;
 }
-
-export default Welcome;
 \`\`\`
 
-## Interactive Exercise: State Management
+This component says hello to anyone you want!
 
-Let's create a counter component using React's useState hook:
+## Interactive Exercise: A Like Button
+
+Let's create a button that counts likes:
 
 \`\`\`jsx
-import React, { useState } from 'react';
-
-function Counter() {
-  const [count, setCount] = useState(0);
+function LikeButton() {
+  const [likes, setLikes] = useState(0);
 
   return (
     <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
+      <p>This post has {likes} likes</p>
+      <button onClick={() => setLikes(likes + 1)}>
+        Like this!
       </button>
     </div>
   );
 }
 \`\`\`
 
-Try implementing this counter component in your React application!
+Try making this button and see how many likes you can get!
 
-## Challenge
+## Fun Fact
 
-Create a ToDo list component that allows users to add and remove items. Use the useState hook to manage the list of tasks.
+Did you know? React was first used on Facebook's newsfeed in 2011!
 
-## Further Reading
-
-1. [React Official Documentation](https://reactjs.org/docs/getting-started.html)
-2. [Hooks API Reference](https://reactjs.org/docs/hooks-reference.html)
-3. [React DevTools](https://reactjs.org/blog/2019/08/15/new-react-devtools.html)
-
-Happy coding with React!
+Keep exploring and have fun with React!
     `,
     author: "John Paul",
-    authorLink: "https://john-porfolio.vercel.app"
+    authorLink: "https://john-porfolio.vercel.app",
+    quizzes: [
+      {
+        question: "What is a component in React?",
+        options: [
+          "A type of CSS style",
+          "A building block for creating user interfaces",
+          "A JavaScript function",
+          "A database table"
+        ],
+        correctAnswer: 1
+      },
+      {
+        question: "What does JSX stand for?",
+        options: [
+          "JavaScript XML",
+          "Java Syntax Extension",
+          "JSON XML",
+          "JavaScript Extension"
+        ],
+        correctAnswer: 0
+      }
+    ]
   },
   {
     id: 2,
-    title: "Advanced",
-    description: "Dive deep into advanced JavaScript concepts and patterns",
-    level: "Intermediate to Advanced",
+    title: "JavaScript Magic",
+    description: "Discover the wonders of JavaScript through fun examples",
+    level: "Beginner to Intermediate",
     content: `
-# Advanced JavaScript Mastery
+# JavaScript Magic
 
-## Topics Covered
+## What is JavaScript?
 
-1. Closures and Lexical Scope
-2. Promises, Async/Await, and Error Handling
-3. Prototypal Inheritance and ES6 Classes
-4. Functional Programming Concepts
-5. Design Patterns in JavaScript
+JavaScript is like a magician's wand for websites. It can make web pages come alive with interactivity!
 
-## Closures
+## Cool Things You Can Do
 
-Closures are a powerful feature in JavaScript. They allow a function to access variables from its outer (enclosing) lexical scope even after the outer function has returned.
+1. Make buttons do things when clicked
+2. Create pop-up messages
+3. Change colors and styles on the fly
+4. Build games and animations
 
-Example:
+## Let's Try Some Magic!
 
-\`\`\`javascript
-function outer() {
-  let count = 0;
-  return function inner() {
-    count++;
-    console.log(count);
-  }
-}
-
-const counter = outer();
-counter(); // 1
-counter(); // 2
-counter(); // 3
-\`\`\`
-
-## Promises and Async/Await
-
-Promises provide a way to handle asynchronous operations. Async/Await is syntactic sugar built on top of promises, making asynchronous code look and behave more like synchronous code.
+Here's a spell to make a message appear:
 
 \`\`\`javascript
-async function fetchUserData(userId) {
-  try {
-    const response = await fetch(\`https://api.example.com/users/\${userId}\`);
-    const userData = await response.json();
-    console.log(userData);
-  } catch (error) {
-    console.error('Failed to fetch user data:', error);
-  }
+function revealMessage() {
+  alert("🎉 You've discovered the secret message! 🎉");
 }
-
-fetchUserData(123);
 \`\`\`
 
-## Interactive Exercise: Implementing a Debounce Function
+## Interactive Exercise: Color Changer
 
-Let's implement a debounce function, which is useful for performance optimization:
+Let's create a button that changes colors:
 
 \`\`\`javascript
-function debounce(func, delay) {
-  let timeoutId;
-  return function (...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func.apply(this, args), delay);
-  };
+function changeColor() {
+  const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  document.body.style.backgroundColor = randomColor;
 }
-
-// Usage
-const debouncedSearch = debounce((query) => {
-  console.log('Searching for:', query);
-}, 300);
-
-// Simulate rapid typing
-debouncedSearch('a');
-debouncedSearch('ap');
-debouncedSearch('app');
-debouncedSearch('appl');
-debouncedSearch('apple');
 \`\`\`
 
-Try implementing this debounce function and use it in a real-world scenario, like an autocomplete search input!
+Try making this color-changing button on your webpage!
 
-## Challenge
+## Fun Fact
 
-Implement a simple pub/sub (publish-subscribe) pattern in JavaScript. This pattern allows for better decoupling of components in your application.
+JavaScript was created in just 10 days in 1995 by Brendan Eich!
 
-## Further Reading
-
-1. [You Don't Know JS (book series)](https://github.com/getify/You-Dont-Know-JS)
-2. [JavaScript Design Patterns](https://addyosmani.com/resources/essentialjsdesignpatterns/book/)
-3. [Functional-Light JavaScript](https://github.com/getify/Functional-Light-JS)
-
-Master these concepts to become a JavaScript pro!
+Keep exploring and enjoy the magic of JavaScript!
     `,
     author: "John Paul",
-    authorLink: "https://john-porfolio.vercel.app"
+    authorLink: "https://john-porfolio.vercel.app",
+    quizzes: [
+      {
+        question: "What can JavaScript do on a webpage?",
+        options: [
+          "Make coffee",
+          "Change colors",
+          "Cook dinner",
+          "Drive a car"
+        ],
+        correctAnswer: 1
+      },
+      {
+        question: "How long did it take to create JavaScript?",
+        options: [
+          "10 years",
+          "10 months",
+          "10 weeks",
+          "10 days"
+        ],
+        correctAnswer: 3
+      }
+    ]
   },
 ]
 
@@ -180,9 +167,15 @@ interface CourseListProps {
 }
 
 export default function CourseList({ onSelectCourse }: CourseListProps) {
+  const [progress, setProgress] = useState<{[key: number]: number}>({})
+
+  const handleProgress = (courseId: number, newProgress: number) => {
+    setProgress(prev => ({...prev, [courseId]: newProgress}))
+  }
+
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Available Courses</h2>
+      <h2 className="text-2xl font-bold mb-4">Fun Learning Adventures</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {courses.map((course) => (
           <CourseCard
@@ -192,6 +185,7 @@ export default function CourseList({ onSelectCourse }: CourseListProps) {
             level={course.level}
             author={course.author}
             authorLink={course.authorLink}
+            progress={progress[course.id] || 0}
             onClick={() => onSelectCourse(course)}
           />
         ))}
