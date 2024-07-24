@@ -1,7 +1,7 @@
 // components/CourseList.tsx
 import React, { useState } from 'react'
 import CourseCard from './CourseCard'
-import { Course, Quiz } from '@/types'
+import { Course } from '@/types'
 
 const courses: Course[] = [
   {
@@ -164,13 +164,15 @@ Keep exploring and enjoy the magic of JavaScript!
 
 interface CourseListProps {
   onSelectCourse: (course: Course) => void
+  onUpdateProgress: (courseId: number, progress: number) => void
 }
 
-export default function CourseList({ onSelectCourse }: CourseListProps) {
+export default function CourseList({ onSelectCourse, onUpdateProgress }: CourseListProps) {
   const [progress, setProgress] = useState<{[key: number]: number}>({})
 
   const handleProgress = (courseId: number, newProgress: number) => {
     setProgress(prev => ({...prev, [courseId]: newProgress}))
+    onUpdateProgress(courseId, newProgress)
   }
 
   return (
