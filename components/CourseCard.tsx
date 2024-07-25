@@ -1,13 +1,14 @@
 import React from 'react'
 
 interface CourseCardProps {
-  title: string
-  description: string
-  level: string
-  author: string
-  authorLink: string
-  progress: number
-  onClick: () => void
+  title: string;
+  description: string;
+  level: string;
+  author: string;
+  authorLink: string;
+  progress: number;
+  onClick: () => void;
+  onProgress: (progress: number) => void;
 }
 
 export default function CourseCard({
@@ -17,8 +18,14 @@ export default function CourseCard({
   author,
   authorLink,
   progress,
-  onClick
+  onClick,
+  onProgress  // Add this line
 }: CourseCardProps) {
+
+  const handleProgressUpdate = (newProgress: number) => {
+    onProgress(newProgress);
+  }
+
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105" onClick={onClick}>
       <div className="p-4">
@@ -34,6 +41,9 @@ export default function CourseCard({
               className="bg-blue-500 rounded-full h-2"
               style={{ width: `${progress}%` }}
             ></div>
+            <button onClick={() => handleProgressUpdate(progress + 10)}>
+              Update Progress
+            </button>
           </div>
           <p className="text-sm text-gray-500 mt-1">{progress}% Complete</p>
         </div>

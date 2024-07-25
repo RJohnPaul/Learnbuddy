@@ -179,7 +179,7 @@ export default function CourseList({ onSelectCourse, onUpdateProgress }: CourseL
       return updatedProgress
     })
   }
-
+  
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Fun Learning Adventures</h2>
