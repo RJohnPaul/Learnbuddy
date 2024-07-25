@@ -171,8 +171,13 @@ export default function CourseList({ onSelectCourse, onUpdateProgress }: CourseL
   const [progress, setProgress] = useState<{[key: number]: number}>({})
 
   const handleProgress = (courseId: number, newProgress: number) => {
-    setProgress(prev => ({...prev, [courseId]: newProgress}))
-    onUpdateProgress(newProgress)
+    setProgress(prev => {
+      const updatedProgress = {...prev, [courseId]: newProgress}
+      // Calculate overall progress across all courses
+      const overallProgress = Object.values(updatedProgress).reduce((sum, value) => sum + value, 0) / courses.length
+      onUpdateProgress(overallProgress)
+      return updatedProgress
+    })
   }
 
   return (
@@ -189,6 +194,7 @@ export default function CourseList({ onSelectCourse, onUpdateProgress }: CourseL
             authorLink={course.authorLink}
             progress={progress[course.id] || 0}
             onClick={() => onSelectCourse(course)}
+            onProgress={(newProgress) => handleProgress(course.id, newProgress)}
           />
         ))}
       </div>
