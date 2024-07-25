@@ -41,13 +41,11 @@ export default function CourseCard({
               className="bg-blue-500 rounded-full h-2"
               style={{ width: `${progress}%` }}
             ></div>
-            <button onClick={() => handleProgressUpdate(progress + 10)}>
-              Update Progress
-            </button>
           </div>
           <p className="text-sm text-gray-500 mt-1">{progress}% Complete</p>
         </div>
       </div>
     </div>
+    
   )
 }
