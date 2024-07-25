@@ -6,15 +6,15 @@ import CourseList from '@/components/CourseList'
 import CourseContent from '@/components/CouseContent'
 import { Course } from '@/types'
 import { Button } from "@/components/ui/button"
-import { 
-  Sheet, 
-  SheetContent, 
-  SheetDescription, 
-  SheetHeader, 
-  SheetTitle, 
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { 
+import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -29,6 +29,7 @@ import Link from 'next/link'
 
 export default function Dashboard() {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null)
+  const [courseProgress, setCourseProgress] = useState(0)
   const router = useRouter()
 
   useEffect(() => {
@@ -41,6 +42,10 @@ export default function Dashboard() {
   const handleLogout = () => {
     logout()
     router.push('/login')
+  }
+
+  const handleProgress = (progress: number) => {
+    setCourseProgress(progress)
   }
 
   return (
@@ -152,9 +157,16 @@ export default function Dashboard() {
         <div className="px-4 py-6 sm:px-0">
           <h1 className="text-3xl font-bold text-gray-900 mb-6">Learning Dashboard</h1>
           {selectedCourse ? (
-            <CourseContent course={selectedCourse} onBack={() => setSelectedCourse(null)} />
+            <CourseContent
+              course={selectedCourse}
+              onBack={() => setSelectedCourse(null)}
+              onProgress={handleProgress}
+            />
           ) : (
-            <CourseList onSelectCourse={setSelectedCourse} />
+            <CourseList
+              onSelectCourse={setSelectedCourse}
+              onUpdateProgress={handleProgress}
+            />
           )}
         </div>
       </main>
@@ -162,7 +174,7 @@ export default function Dashboard() {
       <footer className="bg-white shadow-md mt-8">
         <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
           <p className="text-center text-gray-500 text-sm">
-            © 2023 LearnBud. All rights reserved. 
+            © 2023 LearnBud. All rights reserved.
             Created by <a href="https://john-porfolio.vercel.app" className="text-blue-600 hover:underline">John Paul</a>
           </p>
         </div>
@@ -170,3 +182,7 @@ export default function Dashboard() {
     </div>
   )
 }
+function setCourseProgress(progress: number) {
+  throw new Error('Function not implemented.')
+}
+

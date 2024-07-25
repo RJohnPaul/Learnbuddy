@@ -163,8 +163,8 @@ Keep exploring and enjoy the magic of JavaScript!
 ]
 
 interface CourseListProps {
-  onSelectCourse: (course: Course) => void
-  onUpdateProgress: (courseId: number, progress: number) => void
+  onSelectCourse: (course: Course) => void;
+  onUpdateProgress: (progress: number) => void;
 }
 
 export default function CourseList({ onSelectCourse, onUpdateProgress }: CourseListProps) {
@@ -172,7 +172,7 @@ export default function CourseList({ onSelectCourse, onUpdateProgress }: CourseL
 
   const handleProgress = (courseId: number, newProgress: number) => {
     setProgress(prev => ({...prev, [courseId]: newProgress}))
-    onUpdateProgress(courseId, newProgress)
+    onUpdateProgress(newProgress)
   }
 
   return (
