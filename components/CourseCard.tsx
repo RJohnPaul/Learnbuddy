@@ -42,7 +42,7 @@ export default function CourseCard({
               style={{ width: `${progress}%` }}
             ></div>
           </div>
-          <p className="text-sm text-gray-500 mt-1">{progress}% Complete</p>
+          <p className="text-sm text-gray-500 mt-1">{progress}% Completed</p>
         </div>
       </div>
     </div>
