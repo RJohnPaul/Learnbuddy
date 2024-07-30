@@ -100,7 +100,7 @@ Keep exploring and have fun with React!
 
 ## What is JavaScript?
 
-JavaScript is like a magician's wand for websites. It can make web pages come alive with interactivity!
+JavaScript makes web pages come alive with interactivity , funtionality!
 
 ## Cool Things You Can Do
 
