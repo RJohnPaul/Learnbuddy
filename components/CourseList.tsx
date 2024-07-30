@@ -12,9 +12,13 @@ const courses: Course[] = [
     content: `
 # Welcome to React for Everyone!
 
-## What is React?
+# Before we start, let's understand what React is.
 
-React is a popular tool for building websites and apps. Think of it like digital Lego blocks that help create interactive web pages.
+React is a JavaScript library used for building user interfaces,
+ primarily for single-page applications. 
+ It allows developers to create large web applications
+ And we need to understand that we must always refer the proper documentation
+ for the specified teck stack we are using.
 
 ## Key Concepts
 

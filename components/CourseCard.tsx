@@ -19,7 +19,7 @@ export default function CourseCard({
   authorLink,
   progress,
   onClick,
-  onProgress  // Add this line
+  onProgress 
 }: CourseCardProps) {
 
   const handleProgressUpdate = (newProgress: number) => {
