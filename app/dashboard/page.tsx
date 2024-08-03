@@ -1,9 +1,12 @@
+// components/Dashboard.tsx
 'use client'
 
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import CourseList from '@/components/CourseList'
 import CourseContent from '@/components/CouseContent'
+import EnhancedSearch, { SearchResults } from '@/components/EnhancedSearch'
+import InteractiveQA from '@/components/InteractiveQA'
 import { Course } from '@/types'
 import { Button } from "@/components/ui/button"
 import {
@@ -30,6 +33,7 @@ import Link from 'next/link'
 export default function Dashboard() {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null)
   const [courseProgress, setCourseProgress] = useState(0)
+  const [searchResults, setSearchResults] = useState<SearchResults | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -46,6 +50,10 @@ export default function Dashboard() {
 
   const handleProgress = (progress: number) => {
     setCourseProgress(progress)
+  }
+
+  const handleSearch = (results: SearchResults) => {
+    setSearchResults(results)
   }
 
   return (
@@ -156,6 +164,16 @@ export default function Dashboard() {
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
           <h1 className="text-3xl font-bold text-gray-900 mb-6">Learning Dashboard</h1>
+          
+          <EnhancedSearch onSearch={handleSearch} />
+
+          {searchResults && (
+            <div className="mt-4">
+              <h2 className="text-xl font-semibold">Search Results</h2>
+              <p>{searchResults.results}</p>
+            </div>
+          )}
+
           {selectedCourse ? (
             <CourseContent
               course={selectedCourse}
@@ -168,6 +186,19 @@ export default function Dashboard() {
               onUpdateProgress={handleProgress}
             />
           )}
+
+          <InteractiveQA />
+
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold mb-4">Your Progress</h2>
+            <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+              <div 
+                className="bg-blue-600 h-2.5 rounded-full" 
+                style={{width: `${courseProgress}%`}}
+              ></div>
+            </div>
+            <p className="mt-2">Overall progress: {courseProgress.toFixed(0)}%</p>
+          </div>
         </div>
       </main>
 
@@ -182,7 +213,3 @@ export default function Dashboard() {
     </div>
   )
 }
-function setCourseProgress(progress: number) {
-  throw new Error('Function not implemented.')
-}
-

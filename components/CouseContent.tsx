@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import { Course } from '@/types'
 import { useToast } from "@/components/ui/use-toast"
 import { motion } from "framer-motion"
+import { Input } from "@/components/ui/input"
 
 interface CourseContentProps {
   course: Course;
@@ -17,6 +18,8 @@ export default function CourseContent({ course, onBack, onProgress }: CourseCont
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [quizProgress, setQuizProgress] = useState(0)
+  const [aiResponse, setAiResponse] = useState('')
+  const [userQuestion, setUserQuestion] = useState('')
   const { toast } = useToast()
 
   useEffect(() => {
@@ -65,6 +68,30 @@ export default function CourseContent({ course, onBack, onProgress }: CourseCont
     onProgress(0)
   }
 
+  const handleAskAI = async () => {
+    if (!userQuestion) return
+
+    try {
+      const response = await fetch('/api/ai-tutor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          question: userQuestion, 
+          context: course.title + ' ' + course.content 
+        }),
+      })
+      const data = await response.json()
+      setAiResponse(data.answer)
+    } catch (error) {
+      console.error('Error asking AI:', error)
+      toast({
+        title: "Error",
+        description: "Failed to get AI response. Please try again.",
+        variant: "destructive",
+      })
+    }
+  }
+
   return (
     <div>
       <Button onClick={onBack} className="mb-4">Back to Courses</Button>
@@ -72,6 +99,27 @@ export default function CourseContent({ course, onBack, onProgress }: CourseCont
       <div className="prose max-w-none mb-8">
         <ReactMarkdown>{course.content}</ReactMarkdown>
       </div>
+
+      {/* AI Tutor Section */}
+      <div className="mt-8 mb-8">
+        <h3 className="text-xl font-bold mb-4">Ask AI Tutor</h3>
+        <div className="flex space-x-2">
+          <Input
+            type="text"
+            placeholder="Ask a question about this course..."
+            value={userQuestion}
+            onChange={(e) => setUserQuestion(e.target.value)}
+          />
+          <Button onClick={handleAskAI}>Ask</Button>
+        </div>
+        {aiResponse && (
+          <div className="mt-4 p-4 bg-gray-100 rounded">
+            <h4 className="font-bold">AI Tutor Response:</h4>
+            <p>{aiResponse}</p>
+          </div>
+        )}
+      </div>
+
       {!quizCompleted ? (
         <div className="mt-8">
           <h3 className="text-xl font-bold mb-4">Quiz</h3>
