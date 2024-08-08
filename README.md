@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://your-image-url-here" alt="LearnBud Logo"/>
-</p>
-
 ## LearnBud
 
 LearnBud is a comprehensive learning platform designed to help you master various web development technologies through interactive courses, enhanced search functionalities, and progress tracking.
@@ -12,7 +8,6 @@ LearnBud is a comprehensive learning platform designed to help you master variou
 - 🔍 Enhanced search for course materials
 - 🎯 Progress tracking
 - 🧑‍💻 Interactive Q&A
-- 🔒 Secure user authentication
 - 📱 Responsive design
 
 ## Demo
